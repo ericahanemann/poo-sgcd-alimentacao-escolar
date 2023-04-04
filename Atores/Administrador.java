@@ -31,12 +31,4 @@ public class Administrador {
     public String getSenha() {
         return senha;
     }
-
-    public void visualizarCardapioSemanal() {
-        JOptionPane.showMessageDialog(null, "Cardápio segunda-feira: " + cardapioSemanal.getCardapioSegunda()
-                + "Cardápio terça-feira: " + cardapioSemanal.getCardapioTerca()
-                + "Cardápio quarta-feira: " + cardapioSemanal.getCardapioQuarta()
-                + "Cardápio quinta-feira: " + cardapioSemanal.getCardapioQuinta() +
-                "Cardápio sexta-feira: " + cardapioSemanal.getCardapioSexta());
-    }
 }
