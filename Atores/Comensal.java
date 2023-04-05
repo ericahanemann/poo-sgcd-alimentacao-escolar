@@ -4,13 +4,14 @@ import javax.swing.*;
 
 public class Comensal {
     private String nome;
-    private long matricula;
-    private long cpf;
+    private String matricula;
+    private String cpf;
     private String email;
     private String dataNascimento;
     private double saldoCartao;
 
-    public Comensal(String nome, long matricula, long cpf, String email, String dataNascimento) {
+    public Comensal(String nome, String matricula, String cpf, String email,
+                    String dataNascimento) {
         this.nome = nome;
         this.matricula = matricula;
         this.cpf = cpf;
@@ -25,20 +26,20 @@ public class Comensal {
         return nome;
     }
 
-    public void setMatricula(long matricula) {
+    public void setMatricula(String matricula) {
 
         this.matricula = matricula;
     }
-    public long getMatricula() {
+    public String getMatricula() {
 
         return matricula;
     }
 
-    public void setCpf(long cpf) {
+    public void setCpf(String cpf) {
 
         this.cpf = cpf;
     }
-    public long getCpf() {
+    public String getCpf() {
 
         return cpf;
     }

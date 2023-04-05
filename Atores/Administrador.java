@@ -8,8 +8,8 @@ import javax.swing.*;
 
 public class Administrador {
 
-    private String login;
-    private String senha;
+    private String login = "adm";
+    private String senha = "1234";
     private CardapioSemanal cardapioSemanal;
     private CardapioMensal cardapioMensal;
 
