@@ -1,5 +1,7 @@
 package ControleAlimentacao;
 
+import javax.swing.*;
+
 public class CardapioMensal {
 
 
@@ -20,34 +22,42 @@ public class CardapioMensal {
 
 
     public void setSemana1(CardapioSemanal semana1) {
+
         this.semana1 = semana1;
     }
 
     public CardapioSemanal getSemana1() {
+
         return semana1;
     }
 
     public void setSemana2(CardapioSemanal semana2) {
+
         this.semana2 = semana2;
     }
 
     public CardapioSemanal getSemana2() {
+
         return semana2;
     }
 
     public void setSemana3(CardapioSemanal semana3) {
+
         this.semana3 = semana3;
     }
 
     public CardapioSemanal getSemana3() {
+
         return semana3;
     }
 
     public void setSemana4(CardapioSemanal semana4) {
+
         this.semana4 = semana4;
     }
 
     public CardapioSemanal getSemana4() {
+
         return semana4;
     }
 
@@ -56,7 +66,42 @@ public class CardapioMensal {
     }
 
     public String getInformacaoNutricionalMensal() {
+
         return informacaoNutricionalMensal;
+    }
+
+    public  void mostraCardapio() {
+        JOptionPane.showMessageDialog(null,
+                "------------------------------" +
+                        "CARDÁPIO MENSAL" +
+                        "------------------------------\n\n" +
+                        "Segunda-feira     Terça-feira     Quarta-feira     Quinta-feira     " +
+                        "Sexta-feira\n" +
+                        this.getSemana1().getCardapioSegunda().getNome() + "    " +
+                        this.getSemana1().getCardapioTerca().getNome() + "    " +
+                        this.getSemana1().getCardapioQuarta().getNome() + "    " +
+                        this.getSemana1().getCardapioQuinta().getNome() + "    " +
+                        this.getSemana1().getCardapioSexta().getNome() + "    " +
+                        "\n" +
+                        this.getSemana2().getCardapioSegunda().getNome() + "    " +
+                        this.getSemana2().getCardapioTerca().getNome() + "    " +
+                        this.getSemana2().getCardapioQuarta().getNome() + "    " +
+                        this.getSemana2().getCardapioQuinta().getNome() + "    " +
+                        this.getSemana2().getCardapioSexta().getNome() + "    " +
+                        "\n" +
+                        this.getSemana3().getCardapioSegunda().getNome() + "    " +
+                        this.getSemana3().getCardapioTerca().getNome() + "    " +
+                        this.getSemana3().getCardapioQuarta().getNome() + "    " +
+                        this.getSemana3().getCardapioQuinta().getNome() + "    " +
+                        this.getSemana3().getCardapioSexta().getNome() + "    " +
+                        "\n" +
+                        this.getSemana4().getCardapioSegunda().getNome() + "    " +
+                        this.getSemana4().getCardapioTerca().getNome() + "    " +
+                        this.getSemana4().getCardapioQuarta().getNome() + "    " +
+                        this.getSemana4().getCardapioQuinta().getNome() + "    " +
+                        this.getSemana4().getCardapioSexta().getNome()
+        );
+
     }
 }
 

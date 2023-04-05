@@ -26,38 +26,47 @@ public class CardapioSemanal {
     }
 
     public Alimento getCardapioSegunda() {
+
         return cardapioSegunda;
     }
 
     public void setCardapioTerca(Alimento cardapioTerca) {
+
         this.cardapioTerca = cardapioTerca;
     }
 
     public Alimento getCardapioTerca() {
+
         return cardapioTerca;
     }
 
     public void setCardapioQuarta(Alimento cardapioQuarta) {
+
         this.cardapioQuarta = cardapioQuarta;
     }
 
     public Alimento getCardapioQuarta() {
+
         return cardapioQuarta;
     }
 
     public void setCardapioQuinta(Alimento cardapioQuinta) {
+
         this.cardapioQuinta = cardapioQuinta;
     }
 
     public Alimento getCardapioQuinta() {
+
         return cardapioQuinta;
     }
 
     public void setCardapioSexta(Alimento cardapioSexta) {
+
         this.cardapioSexta = cardapioSexta;
     }
 
     public Alimento getCardapioSexta() {
+
         return cardapioSexta;
     }
 
@@ -66,6 +75,7 @@ public class CardapioSemanal {
     }
 
     public String getInformacaoNutricionalSemanal() {
+
         return informacaoNutricionalSemanal;
     }
 }
