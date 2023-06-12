@@ -84,9 +84,9 @@ public class Main {
                 }
                 case 1: {
                     String login = JOptionPane.showInputDialog("Login: " +
-                            "\nDica: se você não cadastrou nenhum usuário tente 'adm'");
+                            "\nDica: tente 'adm'");
                     String senha = JOptionPane.showInputDialog("Senha:" +
-                            "\nDica: se você não cadastrou nenhum usuário tente '1234'");
+                            "\nDica: tente '1234'");
                     boolean encontrado = false;
 
                     for (Administrador admin : listaAdms) {
