@@ -72,10 +72,11 @@ public class CardapioMensal {
 
     public  void mostraCardapio() {
         JOptionPane.showMessageDialog(null,
-                "------------------------------" +
+                "---------------------------------------------" +
                         "CARDÁPIO MENSAL" +
-                        "------------------------------\n\n" +
-                        "Segunda-feira     Terça-feira     Quarta-feira     Quinta-feira     " +
+                        "---------------------------------------------\n\n" +
+                        "Segunda-feira         Terça-feira         Quarta-feira         " +
+                        "Quinta-feira         " +
                         "Sexta-feira\n" +
                         this.getSemana1().getCardapioSegunda().getNome() + "    " +
                         this.getSemana1().getCardapioTerca().getNome() + "    " +

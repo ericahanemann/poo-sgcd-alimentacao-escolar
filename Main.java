@@ -5,6 +5,7 @@ import ControleAlimentacao.CardapioMensal;
 import ControleAlimentacao.CardapioSemanal;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,22 +13,45 @@ public class Main {
         int tipoUsuario = 99, admOpcao = 99, cmsOpcao = 99;
 
         //estanciando objetos
-        Administrador novoAdm = new Administrador("adm", "1234");
+        ArrayList<Administrador> listaAdms = new ArrayList<Administrador>();
+        ArrayList<Comensal> listaComensais = new ArrayList<Comensal>();
+        ArrayList<Alimento> listaAlimentos = new ArrayList<Alimento>();
+
+        Administrador novoAdm = new Administrador(
+                "Cirilo",
+                "123456789",
+                "cirilo@gmail.com",
+                "01/01/1990",
+                "adm",
+                "1234");
+        listaAdms.add(novoAdm);
 
         Comensal novoCadastroAux = new Comensal(
                 "José da Silva",
-                "123456789",
-                "11111111111",
+                "987654321",
                 "josedasilva@gmail.com",
-                "01/01/2001"
+                "02/02/2002",
+                "22222222222",
+                0
         );
-        Alimento alimentosCadastradosAux = new Alimento(
+        listaComensais.add(novoCadastroAux);
+
+        Alimento alimento1 = new Alimento(
                 "Pão com frango",
                 3,
                 2,
                 1,
                 300
         );
+        Alimento alimentosCadastradosAux = new Alimento(
+                "---------------------",
+                0,
+                0,
+                0,
+                0
+        );
+        listaAlimentos.add(alimento1);
+
         CardapioSemanal cardapioSemanalAux = new CardapioSemanal(
                 alimentosCadastradosAux,
                 alimentosCadastradosAux,
@@ -48,7 +72,7 @@ public class Main {
         while (tipoUsuario != 0) {
             tipoUsuario = Integer.parseInt(JOptionPane.showInputDialog(
                     "Entrar como:\n " +
-                    "0- Sair\n" +
+                    "0- Sair\n " +
                     "1- Administrador\n " +
                     "2- Comensal\n " +
                     "3- Fazer seu cadastro")
@@ -60,15 +84,23 @@ public class Main {
                 }
                 case 1: {
                     String login = JOptionPane.showInputDialog("Login: " +
-                            "\nDica: tente 'adm'");
+                            "\nDica: se você não cadastrou nenhum usuário tente 'adm'");
                     String senha = JOptionPane.showInputDialog("Senha:" +
-                            "\nDica: tente '1234'");
+                            "\nDica: se você não cadastrou nenhum usuário tente '1234'");
+                    boolean encontrado = false;
 
-                    if (login.equals(novoAdm.getLogin()) && senha.equals(novoAdm.getSenha())) {
+                    for (Administrador admin : listaAdms) {
+                        if (admin.getLogin().equals(login) && admin.getSenha().equals(senha)) {
+                            encontrado = true;
+                            break;
+                        }
+                    }
+
+                    if (encontrado) {
 
                         while (admOpcao != 0) {
                             admOpcao = Integer.parseInt(JOptionPane.showInputDialog(
-                                    "0- Voltar para o menu principal\n" +
+                                    " 0- Voltar para o menu principal\n " +
                                     "1- Cadastrar Alimento\n " +
                                     "2- Cadastrar cardápio\n " +
                                     "3- Visualizar Cardápio\n " +
@@ -96,17 +128,38 @@ public class Main {
                                             "Quantidade (em gramas):"
                                     ));
 
-                                    alimentosCadastradosAux.setNome(nome);
-                                    alimentosCadastradosAux.setPercentualProteinas(percentualProteinas);
-                                    alimentosCadastradosAux.setPercentualCarboidratos(percentualCarboidratos);
-                                    alimentosCadastradosAux.setPercentualLipidios(percentualLipidios);
-                                    alimentosCadastradosAux.setQuantidade(quantidade);
+                                    Alimento novoAlimento = new Alimento(nome,
+                                            percentualProteinas,
+                                            percentualCarboidratos,
+                                            percentualLipidios,
+                                            quantidade);
+                                    listaAlimentos.add(novoAlimento);
 
                                     JOptionPane.showMessageDialog(null, "Alimento cadastrado com sucesso!");
 
                                     break;
                                 }
                                 case 2: {
+                                    String alimentosCadastrados = "";
+
+                                    for (int i = 0; i < listaAlimentos.size(); i++) {
+                                        Alimento alimento = listaAlimentos.get(i);
+
+                                        String nome = alimento.getNome();
+                                        float percentualProteinas = alimento.getPercentualProteinas();
+                                        float percentualCarboidratos = alimento.getPercentualCarboidratos();
+                                        float percentualLipidios = alimento.getPercentualLipidios();
+                                        float quantidade = alimento.getQuantidade();
+
+                                        String dadosAlimento = i + " - Nome: " + nome + "\n"
+                                                + "Percentual de Proteínas: " + percentualProteinas + "%\n"
+                                                + "Percentual de Carboidratos: " + percentualCarboidratos + "%\n"
+                                                + "Percentual de Lipídios: " + percentualLipidios + "%\n"
+                                                + "Quantidade: " + quantidade + " gramas\n\n";
+
+                                        alimentosCadastrados += dadosAlimento;
+                                    }
+
                                     int semanaCardapio = Integer.parseInt(JOptionPane.showInputDialog(
                                             "Você deseja fazer cadastro do cardápio de qual semana?\n " +
                                                     "1- Semana 1\n " +
@@ -117,77 +170,61 @@ public class Main {
 
                                     int cardapioSegunda = Integer.parseInt(JOptionPane.showInputDialog(
                                             "Escolha o cardápio de segunda-feira:\n " +
-                                                    "1-" + alimentosCadastradosAux.getNome() +
-                                                    "\nPercentual de proteínas: " + alimentosCadastradosAux.getPercentualProteinas() +
-                                                    "\nPercentual de carboidratos: " + alimentosCadastradosAux.getPercentualCarboidratos() +
-                                                    "\nPercentual de lipídios: " + alimentosCadastradosAux.getPercentualLipidios() +
-                                                    "\nQuantidade: " + alimentosCadastradosAux.getQuantidade() + "g"
+                                                    alimentosCadastrados
                                     ));
-                                    cardapioSemanalAux.setCardapioSegunda(alimentosCadastradosAux);
 
                                     int cardapioTerca = Integer.parseInt(JOptionPane.showInputDialog(
                                             "Escolha o cardápio de terca-feira:\n " +
-                                                    "1-" + alimentosCadastradosAux.getNome() +
-                                                    "\nPercentual de proteínas: " + alimentosCadastradosAux.getPercentualProteinas() +
-                                                    "\nPercentual de carboidratos: " + alimentosCadastradosAux.getPercentualCarboidratos() +
-                                                    "\nPercentual de lipídios: " + alimentosCadastradosAux.getPercentualLipidios() +
-                                                    "\nQuantidade: " + alimentosCadastradosAux.getQuantidade() + "g"
+                                                    alimentosCadastrados
                                     ));
-                                    cardapioSemanalAux.setCardapioTerca(alimentosCadastradosAux);
 
                                     int cardapioQuarta = Integer.parseInt(JOptionPane.showInputDialog(
                                             "Escolha o cardápio de quarta-feira:\n " +
-                                                    "1-" + alimentosCadastradosAux.getNome() +
-                                                    "\nPercentual de proteínas: " + alimentosCadastradosAux.getPercentualProteinas() +
-                                                    "\nPercentual de carboidratos: " + alimentosCadastradosAux.getPercentualCarboidratos() +
-                                                    "\nPercentual de lipídios: " + alimentosCadastradosAux.getPercentualLipidios() +
-                                                    "\nQuantidade: " + alimentosCadastradosAux.getQuantidade() + "g"
+                                                    alimentosCadastrados
                                     ));
-                                    cardapioSemanalAux.setCardapioQuarta(alimentosCadastradosAux);
 
                                     int cardapioSQuinta = Integer.parseInt(JOptionPane.showInputDialog(
                                             "Escolha o cardápio de quinta-feira:\n " +
-                                                    "1-" + alimentosCadastradosAux.getNome() +
-                                                    "\nPercentual de proteínas: " + alimentosCadastradosAux.getPercentualProteinas() +
-                                                    "\nPercentual de carboidratos: " + alimentosCadastradosAux.getPercentualCarboidratos() +
-                                                    "\nPercentual de lipídios: " + alimentosCadastradosAux.getPercentualLipidios() +
-                                                    "\nQuantidade: " + alimentosCadastradosAux.getQuantidade() + "g"
+                                                    alimentosCadastrados
                                     ));
-                                    cardapioSemanalAux.setCardapioQuinta(alimentosCadastradosAux);
 
                                     int cardapioSexta = Integer.parseInt(JOptionPane.showInputDialog(
                                             "Escolha o cardápio de sexta-feira:\n " +
-                                                    "1-" + alimentosCadastradosAux.getNome() +
-                                                    "\nPercentual de proteínas: " + alimentosCadastradosAux.getPercentualProteinas() +
-                                                    "\nPercentual de carboidratos: " + alimentosCadastradosAux.getPercentualCarboidratos() +
-                                                    "\nPercentual de lipídios: " + alimentosCadastradosAux.getPercentualLipidios() +
-                                                    "\nQuantidade: " + alimentosCadastradosAux.getQuantidade() + "g"
+                                                    alimentosCadastrados
                                     ));
-                                    cardapioSemanalAux.setCardapioSexta(alimentosCadastradosAux);
 
                                     String informacaoNutricionaSemanal = "bem saudável";
                                     String informacaoNutricionaMensal = "super saudável";
-                                    cardapioSemanalAux.setInformacaoNutricionalSemanal(informacaoNutricionaSemanal);
+
+                                    CardapioSemanal novoCardapioSemanal = new CardapioSemanal(
+                                            listaAlimentos.get(cardapioSegunda),
+                                            listaAlimentos.get(cardapioTerca),
+                                            listaAlimentos.get(cardapioQuarta),
+                                            listaAlimentos.get(cardapioSQuinta),
+                                            listaAlimentos.get(cardapioSexta),
+                                            informacaoNutricionaSemanal
+                                    );
+
                                     cardapioMensalAux.setInformacaoNutricionalMensal(informacaoNutricionaMensal);
 
                                     switch (semanaCardapio) {
                                         case 1: {
-                                            cardapioMensalAux.setSemana1(cardapioSemanalAux);
+                                            cardapioMensalAux.setSemana1(novoCardapioSemanal);
 
                                             break;
                                         }
                                         case 2: {
-                                            cardapioMensalAux.setSemana2(cardapioSemanalAux);
+                                            cardapioMensalAux.setSemana2(novoCardapioSemanal);
 
                                             break;
                                         }
                                         case 3: {
-                                            cardapioMensalAux.setSemana3(cardapioSemanalAux);
+                                            cardapioMensalAux.setSemana3(novoCardapioSemanal);
 
                                             break;
                                         }
                                         case 4: {
-                                            cardapioMensalAux.setSemana4(cardapioSemanalAux);
+                                            cardapioMensalAux.setSemana4(novoCardapioSemanal);
 
                                             break;
                                         }
@@ -228,13 +265,14 @@ public class Main {
                     break;
                 }
                 case 2: {
+                    cmsOpcao = 99;
+
                     while (cmsOpcao != 0) {
                         cmsOpcao = Integer.parseInt(JOptionPane.showInputDialog(
-                                "0- Voltar para o menu principal\n" +
+                                " 0- Voltar para o menu principal\n " +
                                         "1- Fazer check-in\n " +
                                         "2- Fazer recarga do cartão\n " +
-                                        "3- Visualizar Cardápio\n " +
-                                        "4- Voltar para a tela inicial")
+                                        "3- Visualizar Cardápio\n")
                         );
 
                         switch (cmsOpcao) {
@@ -243,40 +281,74 @@ public class Main {
                             }
                             case 1: {
                                 int opcaoCheckin = 0;
+                                boolean cpfEncontrado = false;
 
-                                JOptionPane.showInputDialog("Digite seu CPF:");
+                                String cpfCheckin = JOptionPane.showInputDialog("Digite seu " +
+                                        "CPF:\n Dica: caso não tenha feito seu cadastro, tente " +
+                                        "'987654321'");
 
-                                while (opcaoCheckin != 1 && opcaoCheckin != 2) {
-                                    opcaoCheckin = Integer.parseInt(JOptionPane.showInputDialog(
-                                            "Nome: " + novoCadastroAux.getNome() +
-                                                    "\nMatrícula: " + novoCadastroAux.getMatricula() +
-                                                    "\nSaldo do cartão: " + novoCadastroAux.getSaldoCartao() +
-                                                    "\n\nDeseja fazer check-in? (-10 créditos)" +
-                                                    "\n1- Sim" +
-                                                    "\n2- Não"
-                                    ));
+                                for (Comensal comensal : listaComensais) {
+                                    if (comensal.getCpf().equals(cpfCheckin)) {
+                                        cpfEncontrado = true;
 
-                                    if (opcaoCheckin == 1 && novoCadastroAux.getSaldoCartao() >= 10) {
-                                        novoCadastroAux.usoCartao(10);
-                                        JOptionPane.showMessageDialog(null,"Check-in realizado!\n" +
-                                                "Saldo atual do cartão: " + novoCadastroAux.getSaldoCartao() + " créditos");
+                                        while (opcaoCheckin != 1 && opcaoCheckin != 2) {
+                                            opcaoCheckin = Integer.parseInt(JOptionPane.showInputDialog(
+                                                    "Nome: " + comensal.getNome() +
+                                                            "\nMatrícula: " + comensal.getMatricula() +
+                                                            "\nSaldo do cartão: " + comensal.getSaldoCartao() +
+                                                            "\n\nDeseja fazer check-in? (-10 créditos)" +
+                                                            "\n1- Sim" +
+                                                            "\n2- Não"
+                                            ));
 
-                                    } else if (opcaoCheckin == 1 && novoCadastroAux.getSaldoCartao() < 10) {
-                                        JOptionPane.showMessageDialog(null, "Você não tem saldo suficiente " +
-                                                "para " +
-                                                "fazer check-in");
-                                    } else if (opcaoCheckin == 2) {
+                                            if (opcaoCheckin == 1 && comensal.getSaldoCartao() >= 10) {
+                                                comensal.usoCartao(10);
+                                                JOptionPane.showMessageDialog(null,"Check-in realizado!\n" +
+                                                        "Saldo atual do cartão: " + comensal.getSaldoCartao() + " créditos");
+
+                                            } else if (opcaoCheckin == 1 && comensal.getSaldoCartao() < 10) {
+                                                JOptionPane.showMessageDialog(null, "Você não tem saldo suficiente " +
+                                                        "para " +
+                                                        "fazer check-in");
+                                            } else if (opcaoCheckin == 2) {
+                                                break;
+                                            }
+                                        }
+
                                         break;
                                     }
+                                }
+
+                                if (!cpfEncontrado) {
+                                    JOptionPane.showMessageDialog(null, "CPF não encontrado na " +
+                                            "lista de comensais.");
                                 }
 
                                 break;
                             }
 
                             case 2: {
-                                double valor = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor da " +
-                                        "recarga:"));
-                                novoCadastroAux.recargaCartao(valor);
+                                boolean cpfEncontrado = false;
+                                String cpfCheckin = JOptionPane.showInputDialog("Digite seu CPF:\n " +
+                                        "Dica: caso não tenha feito seu cadastro, tente " +
+                                        "'987654321'");
+
+                                for (Comensal comensal : listaComensais) {
+                                    if (comensal.getCpf().equals(cpfCheckin)) {
+                                        cpfEncontrado = true;
+
+                                        double valor = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor da " +
+                                                "recarga:"));
+                                        comensal.recargaCartao(valor);
+
+                                        break;
+                                    }
+                                }
+
+                                if (!cpfEncontrado) {
+                                    JOptionPane.showMessageDialog(null, "CPF não encontrado na " +
+                                            "lista de comensais.");
+                                }
 
                                 break;
                             }
@@ -313,11 +385,13 @@ public class Main {
                             "Data de nascimento (dd/mm/aaaa)"
                     );
 
-                    novoCadastroAux.setNome(nome);
-                    novoCadastroAux.setMatricula(matricula);
-                    novoCadastroAux.setCpf(cpf);
-                    novoCadastroAux.setEmail(email);
-                    novoCadastroAux.setDataNascimento(dataNascimento);
+                    Comensal novoCadastroComensal = new Comensal(nome,
+                            cpf,
+                            email,
+                            dataNascimento,
+                            matricula,
+                            0);
+                    listaComensais.add(novoCadastroComensal);
 
                     JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso!");
 

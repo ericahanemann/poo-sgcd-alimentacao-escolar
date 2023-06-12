@@ -1,18 +1,21 @@
+package Atores;
+
 public class Comensal extends Ator {
-    private int matricula;
+    private String matricula;
     private float saldoCartao;
 
-    public Comensal(String nome, int cpf, String email, String dataNascimento, int matricula, float saldoCartao) {
+    public Comensal(String nome, String cpf, String email, String dataNascimento, String matricula,
+                    float saldoCartao) {
         super(nome, cpf, email, dataNascimento);
         this.matricula = matricula;
         this.saldoCartao = saldoCartao;
     }
 
-    public int getMatricula() {
+    public String getMatricula() {
         return this.matricula;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
@@ -22,5 +25,13 @@ public class Comensal extends Ator {
 
     public void setSaldoCartao(float saldoCartao) {
         this.saldoCartao = saldoCartao;
+    }
+
+    public void recargaCartao(double valor) {
+        this.saldoCartao += valor;
+    }
+
+    public void usoCartao(float valor) {
+        this.saldoCartao -= valor;
     }
 }

@@ -1,10 +1,12 @@
+package Atores;
+
 public class Ator {
     private String nome;
-    private int cpf;
+    private String cpf;
     private String email;
     private String dataNascimento;
 
-    public Ator(String nome, int cpf, String email, String dataNascimento) {
+    public Ator(String nome, String cpf, String email, String dataNascimento) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
@@ -19,11 +21,11 @@ public class Ator {
         this.nome = nome;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return this.cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

@@ -1,8 +1,11 @@
+package Atores;
+
 public class Administrador extends Ator {
     private String login;
     private String senha;
 
-    public Administrador(String nome, int cpf, String email, String dataNascimento, String login, String senha) {
+    public Administrador(String nome, String cpf, String email, String dataNascimento, String login,
+                         String senha) {
         super(nome, cpf, email, dataNascimento);
         this.login = login;
         this.senha = senha;
