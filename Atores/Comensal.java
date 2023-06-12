@@ -1,77 +1,26 @@
-package Atores;
+public class Comensal extends Ator {
+    private int matricula;
+    private float saldoCartao;
 
-import javax.swing.*;
-
-public class Comensal {
-    private String nome;
-    private String matricula;
-    private String cpf;
-    private String email;
-    private String dataNascimento;
-    private double saldoCartao;
-
-    public Comensal(String nome, String matricula, String cpf, String email,
-                    String dataNascimento) {
-        this.nome = nome;
+    public Comensal(String nome, int cpf, String email, String dataNascimento, int matricula, float saldoCartao) {
+        super(nome, cpf, email, dataNascimento);
         this.matricula = matricula;
-        this.cpf = cpf;
-        this.email = email;
-        this.dataNascimento = dataNascimento;
+        this.saldoCartao = saldoCartao;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    public String getNome() {
-        return nome;
+    public int getMatricula() {
+        return this.matricula;
     }
 
-    public void setMatricula(String matricula) {
-
+    public void setMatricula(int matricula) {
         this.matricula = matricula;
     }
-    public String getMatricula() {
 
-        return matricula;
+    public float getSaldoCartao() {
+        return this.saldoCartao;
     }
 
-    public void setCpf(String cpf) {
-
-        this.cpf = cpf;
-    }
-    public String getCpf() {
-
-        return cpf;
-    }
-
-    public void setEmail(String email) {
-
-        this.email = email;
-    }
-    public String getEmail() {
-
-        return email;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-
-        this.dataNascimento = dataNascimento;
-    }
-    public String getDataNascimento() {
-
-        return dataNascimento;
-    }
-    public double getSaldoCartao() {
-
-        return saldoCartao;
-    }
-
-    public void usoCartao(double valor) {
-
-        this.saldoCartao -= valor;
-    }
-    public void recargaCartao(double valor) {
-
-        this.saldoCartao += valor;
+    public void setSaldoCartao(float saldoCartao) {
+        this.saldoCartao = saldoCartao;
     }
 }

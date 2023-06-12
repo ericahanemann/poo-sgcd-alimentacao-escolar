@@ -1,34 +1,26 @@
-package Atores;
+public class Administrador extends Ator {
+    private String login;
+    private String senha;
 
-import ControleAlimentacao.Alimento;
-import ControleAlimentacao.CardapioMensal;
-import ControleAlimentacao.CardapioSemanal;
-
-import javax.swing.*;
-
-public class Administrador {
-
-    private String login = "adm";
-    private String senha = "1234";
-    private CardapioSemanal cardapioSemanal;
-    private CardapioMensal cardapioMensal;
-
-    public Administrador(String login, String senha) {
+    public Administrador(String nome, int cpf, String email, String dataNascimento, String login, String senha) {
+        super(nome, cpf, email, dataNascimento);
         this.login = login;
         this.senha = senha;
+    }
+
+    public String getLogin() {
+        return this.login;
     }
 
     public void setLogin(String login) {
         this.login = login;
     }
-    public String getLogin() {
-        return login;
+
+    public String getSenha() {
+        return this.senha;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-    public String getSenha() {
-        return senha;
     }
 }
