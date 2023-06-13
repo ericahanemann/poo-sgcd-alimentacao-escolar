@@ -9,15 +9,13 @@ public class CardapioMensal {
     private CardapioSemanal semana2;
     private CardapioSemanal semana3;
     private CardapioSemanal semana4;
-    private String informacaoNutricionalMensal;
 
 
-    public CardapioMensal(CardapioSemanal semana1, CardapioSemanal semana2, CardapioSemanal semana3, CardapioSemanal semana4, String informacaoNutricionalMensal) {
+    public CardapioMensal(CardapioSemanal semana1, CardapioSemanal semana2, CardapioSemanal semana3, CardapioSemanal semana4) {
         this.semana1 = semana1;
         this.semana2 = semana2;
         this.semana3 = semana3;
         this.semana4 = semana4;
-        this.informacaoNutricionalMensal = informacaoNutricionalMensal;
     }
 
 
@@ -61,15 +59,6 @@ public class CardapioMensal {
         return semana4;
     }
 
-    public void setInformacaoNutricionalMensal(String informacaoNutricionalMensal) {
-        this.informacaoNutricionalMensal = informacaoNutricionalMensal;
-    }
-
-    public String getInformacaoNutricionalMensal() {
-
-        return informacaoNutricionalMensal;
-    }
-
     public  void mostraCardapio() {
         JOptionPane.showMessageDialog(null,
                 "---------------------------------------------" +
@@ -77,7 +66,7 @@ public class CardapioMensal {
                         "---------------------------------------------\n\n" +
                         "Segunda-feira         Terça-feira         Quarta-feira         " +
                         "Quinta-feira         " +
-                        "Sexta-feira\n" +
+                        "Sexta-feira\n\n" +
                         this.getSemana1().getCardapioSegunda().getNome() + "    " +
                         this.getSemana1().getCardapioTerca().getNome() + "    " +
                         this.getSemana1().getCardapioQuarta().getNome() + "    " +
@@ -100,7 +89,19 @@ public class CardapioMensal {
                         this.getSemana4().getCardapioTerca().getNome() + "    " +
                         this.getSemana4().getCardapioQuarta().getNome() + "    " +
                         this.getSemana4().getCardapioQuinta().getNome() + "    " +
-                        this.getSemana4().getCardapioSexta().getNome()
+                        this.getSemana4().getCardapioSexta().getNome() +
+                        "\n\n" +
+                        "----------------------------------------------------------------------------------------------------------------------" +
+                        "\n\n" +
+                        "MÉDIA DE NUTRIENTES DIÁRIOS" + "\n" +
+                        "- Semana 01: " + this.getSemana1().getInformacaoNutricionalSemanal() +
+                        "\n" +
+                        "- Semana 02: " + this.getSemana2().getInformacaoNutricionalSemanal() +
+                        "\n" +
+                        "- Semana 03: " + this.getSemana3().getInformacaoNutricionalSemanal() +
+                        "\n" +
+                        "- Semana 04: " + this.getSemana4().getInformacaoNutricionalSemanal() +
+                        "\n"
         );
 
     }

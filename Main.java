@@ -58,14 +58,13 @@ public class Main {
                 alimentosCadastradosAux,
                 alimentosCadastradosAux,
                 alimentosCadastradosAux,
-                "bem saudável"
+                " "
         );
         CardapioMensal cardapioMensalAux = new CardapioMensal(
                 cardapioSemanalAux,
                 cardapioSemanalAux,
                 cardapioSemanalAux,
-                cardapioSemanalAux,
-                "muito saudável"
+                cardapioSemanalAux
         );
 
         //menu
@@ -77,6 +76,8 @@ public class Main {
                     "2- Comensal\n " +
                     "3- Fazer seu cadastro")
             );
+
+            admOpcao = 99;
 
             switch (tipoUsuario) {
                 case 0: {
@@ -115,24 +116,28 @@ public class Main {
                                     String nome = JOptionPane.showInputDialog(
                                             "Nome do alimento:"
                                     );
-                                    float percentualProteinas = Float.parseFloat(JOptionPane.showInputDialog(
-                                            "Percentual de proteínas:"
+                                    float quantidadeProteinas =
+                                            Float.parseFloat(JOptionPane.showInputDialog(
+                                            "Quantidade de proteínas (em gramas):"
                                     ));
-                                    float percentualCarboidratos = Float.parseFloat(JOptionPane.showInputDialog(
-                                            "Percentual de carboidratos:"
+                                    float quantidadeCarboidratos =
+                                            Float.parseFloat(JOptionPane.showInputDialog(
+                                            "Quantidade de carboidratos (em gramas):"
                                     ));
-                                    float percentualLipidios = Float.parseFloat(JOptionPane.showInputDialog(
-                                            "Percentual de lipídios:"
+                                    float quantidadeLipidios =
+                                            Float.parseFloat(JOptionPane.showInputDialog(
+                                            "Quantidade de lipídios (em gramas):"
                                     ));
-                                    float quantidade = Float.parseFloat(JOptionPane.showInputDialog(
+                                    float quantidadeAlimento =
+                                            Float.parseFloat(JOptionPane.showInputDialog(
                                             "Quantidade (em gramas):"
                                     ));
 
                                     Alimento novoAlimento = new Alimento(nome,
-                                            percentualProteinas,
-                                            percentualCarboidratos,
-                                            percentualLipidios,
-                                            quantidade);
+                                            quantidadeProteinas,
+                                            quantidadeCarboidratos,
+                                            quantidadeLipidios,
+                                            quantidadeAlimento);
                                     listaAlimentos.add(novoAlimento);
 
                                     JOptionPane.showMessageDialog(null, "Alimento cadastrado com sucesso!");
@@ -146,16 +151,18 @@ public class Main {
                                         Alimento alimento = listaAlimentos.get(i);
 
                                         String nome = alimento.getNome();
-                                        float percentualProteinas = alimento.getPercentualProteinas();
-                                        float percentualCarboidratos = alimento.getPercentualCarboidratos();
-                                        float percentualLipidios = alimento.getPercentualLipidios();
-                                        float quantidade = alimento.getQuantidade();
+                                        float quantidadeProteinas =
+                                                alimento.getQuantidadeProteinas();
+                                        float quantidadeCarboidratos =
+                                                alimento.getQuantidadeCarboidratos();
+                                        float quantidadeLipidios = alimento.getQuantidadeLipidios();
+                                        float quantidadeAlimento = alimento.getQuantidadeAlimento();
 
                                         String dadosAlimento = i + " - Nome: " + nome + "\n"
-                                                + "Percentual de Proteínas: " + percentualProteinas + "%\n"
-                                                + "Percentual de Carboidratos: " + percentualCarboidratos + "%\n"
-                                                + "Percentual de Lipídios: " + percentualLipidios + "%\n"
-                                                + "Quantidade: " + quantidade + " gramas\n\n";
+                                                + "Percentual de Proteínas: " + quantidadeProteinas + "g\n"
+                                                + "Percentual de Carboidratos: " + quantidadeCarboidratos + "g\n"
+                                                + "Percentual de Lipídios: " + quantidadeLipidios + "g\n"
+                                                + "Quantidade: " + quantidadeAlimento + " g\n\n";
 
                                         alimentosCadastrados += dadosAlimento;
                                     }
@@ -193,8 +200,34 @@ public class Main {
                                                     alimentosCadastrados
                                     ));
 
-                                    String informacaoNutricionaSemanal = "bem saudável";
-                                    String informacaoNutricionaMensal = "super saudável";
+                                    float mediaProteinasDiarias = (
+                                            listaAlimentos.get(cardapioSegunda).getQuantidadeProteinas()
+                                            + listaAlimentos.get(cardapioTerca).getQuantidadeProteinas()
+                                            + listaAlimentos.get(cardapioQuarta).getQuantidadeProteinas()
+                                            + listaAlimentos.get(cardapioSQuinta).getQuantidadeProteinas()
+                                            + listaAlimentos.get(cardapioSexta).getQuantidadeProteinas()
+                                            ) / 5;
+
+                                    float mediaCarboidratosDiarios = (
+                                            listaAlimentos.get(cardapioSegunda).getQuantidadeCarboidratos()
+                                                    + listaAlimentos.get(cardapioTerca).getQuantidadeCarboidratos()
+                                                    + listaAlimentos.get(cardapioQuarta).getQuantidadeCarboidratos()
+                                                    + listaAlimentos.get(cardapioSQuinta).getQuantidadeCarboidratos()
+                                                    + listaAlimentos.get(cardapioSexta).getQuantidadeCarboidratos()
+                                    ) / 5;
+
+                                    float mediaLipidiosDiarios = (
+                                            listaAlimentos.get(cardapioSegunda).getQuantidadeLipidios()
+                                                    + listaAlimentos.get(cardapioTerca).getQuantidadeLipidios()
+                                                    + listaAlimentos.get(cardapioQuarta).getQuantidadeLipidios()
+                                                    + listaAlimentos.get(cardapioSQuinta).getQuantidadeLipidios()
+                                                    + listaAlimentos.get(cardapioSexta).getQuantidadeLipidios()
+                                    ) / 5;
+
+                                    String informacaoNutricionaSemanal =
+                                            "Proteínas: " + mediaProteinasDiarias + "g, " +
+                                            "Carboidratos: " + mediaCarboidratosDiarios + "g, " +
+                                            "Lipídios: " + mediaLipidiosDiarios + "g, ";
 
                                     CardapioSemanal novoCardapioSemanal = new CardapioSemanal(
                                             listaAlimentos.get(cardapioSegunda),
@@ -204,8 +237,6 @@ public class Main {
                                             listaAlimentos.get(cardapioSexta),
                                             informacaoNutricionaSemanal
                                     );
-
-                                    cardapioMensalAux.setInformacaoNutricionalMensal(informacaoNutricionaMensal);
 
                                     switch (semanaCardapio) {
                                         case 1: {

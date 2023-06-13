@@ -4,18 +4,19 @@ public class Alimento {
 
 
     private String nome;
-    private float percentualProteinas;
-    private float percentualCarboidratos;
-    private float percentualLipidios;
-    private float quantidade;
+    private float quantidadeProteinas;
+    private float quantidadeCarboidratos;
+    private float quantidadeLipidios;
+    private float quantidadeAlimento;
 
 
-    public Alimento(String nome, float percentualProteinas, float percentualCarboidratos, float percentualLipidios, float quantidade) {
+    public Alimento(String nome, float quantidadeProteinas, float quantidadeCarboidratos,
+                    float quantidadeLipidios, float quantidadeAlimento) {
         this.nome = nome;
-        this.percentualProteinas = percentualProteinas;
-        this.percentualCarboidratos = percentualCarboidratos;
-        this.percentualLipidios = percentualLipidios;
-        this.quantidade = quantidade;
+        this.quantidadeProteinas = quantidadeProteinas;
+        this.quantidadeCarboidratos = quantidadeCarboidratos;
+        this.quantidadeLipidios = quantidadeLipidios;
+        this.quantidadeAlimento = quantidadeAlimento;
     }
 
 
@@ -27,36 +28,38 @@ public class Alimento {
         this.nome = nome;
     }
 
-    public float getPercentualProteinas() {
-        return percentualProteinas;
+    public float getQuantidadeProteinas() {
+        return quantidadeProteinas;
     }
 
-    public void setPercentualProteinas(float percentualProteinas) {
-        this.percentualProteinas = percentualProteinas;
+    public void setQuantidadeProteinas(float quantidadeProteinas) {
+        this.quantidadeProteinas = quantidadeProteinas;
     }
 
-    public float getPercentualCarboidratos() {
-        return percentualCarboidratos;
+    public float getQuantidadeCarboidratos() {
+        return quantidadeCarboidratos;
     }
 
-    public void setPercentualCarboidratos(float percentualCarboidratos) {
-        this.percentualCarboidratos = percentualCarboidratos;
+    public void setQuantidadeCarboidratos(float quantidadeCarboidratos) {
+        this.quantidadeCarboidratos = quantidadeCarboidratos;
     }
 
-    public float getPercentualLipidios() {
-        return percentualLipidios;
+    public float getQuantidadeLipidios() {
+
+        return quantidadeLipidios;
     }
 
-    public void setPercentualLipidios(float percentualLipidios) {
-        this.percentualLipidios = percentualLipidios;
+    public void setQuantidadeLipidios(float quantidadeLipidios) {
+        this.quantidadeLipidios = quantidadeLipidios;
     }
 
-    public float getQuantidade() {
-        return quantidade;
+    public float getQuantidadeAlimento() {
+
+        return quantidadeAlimento;
     }
 
-    public void setQuantidade(float quantidade) {
-        this.quantidade = quantidade;
+    public void setQuantidadeAlimento(float quantidadeAlimento) {
+        this.quantidadeAlimento = quantidadeAlimento;
     }
 }
 
