@@ -12,7 +12,7 @@ import java.util.Date;
 public class Main {
     public static void main(String[] args) {
         //controle
-        int tipoUsuario = 99, admOpcao = 99, cmsOpcao = 99, numeroCheckins = 0, numeroCadastros = 0;
+        int tipoUsuario = 99, admOpcao = 99, cmsOpcao = 99, numeroCheckins = 0;
 
         ArrayList<LocalDate> listaDataCheckin = new ArrayList<LocalDate>();
         ArrayList<LocalDate> listaDataCadastro = new ArrayList<LocalDate>();
@@ -39,6 +39,8 @@ public class Main {
                 0
         );
         listaComensais.add(novoCadastroAux);
+        //adicionando uma data específica para simular um cadastro mais antigo
+        listaDataCadastro.add(LocalDate.of(2023, 4, 10));
 
         Alimento alimento1 = new Alimento(
                 "Pão com frango",
@@ -308,7 +310,9 @@ public class Main {
                                     }
 
                                     JOptionPane.showMessageDialog(null,
-                                            "RELATÓRIO DE CHECK-INS E CADASTROS NO SISTEMA" +
+                                            "-----------------------------------------------------------------------------               " +
+                                                    "\n" +
+                                                    "RELATÓRIO DE CHECK-INS E CADASTROS NO SISTEMA" +
                                                     "\n" +
                                                     "-----------------------------------------------------------------------------" +
                                                     "\n\n" +
@@ -320,13 +324,15 @@ public class Main {
                                                     "\nNúmero de check-ins realizados até 3 meses" +
                                                     "atrás: " + checkinTrintaDias +
                                                     "\n\n" +
-                                                    "Número total de cadastros realizados: " + numeroCadastros +
+                                                    "Número total de cadastros realizados: " + listaComensais.size() +
                                                     "\nNúmero de cadastros realizados até 5 dias " +
                                                     "atrás: " + cadastrosCincoDias +
                                                     "\nNúmero de cadastros realizados até 30 dias" +
                                                     " atrás: " + cadastrosTrintaDias +
                                                     "\nNúmero de check-ins realizados até 3 meses" +
-                                                    " atrás: " + cadastrosTresMeses
+                                                    " atrás: " + cadastrosTresMeses +
+                                                    "\n\n" +
+                                                    "-----------------------------------------------------------------------------"
                                     );
 
                                     break;
@@ -480,7 +486,6 @@ public class Main {
                             0);
                     listaComensais.add(novoCadastroComensal);
 
-                    numeroCadastros++;
                     listaDataCadastro.add(LocalDate.now());
                     JOptionPane.showMessageDialog(null, "Aluno(a) cadastrado(a) com sucesso!");
 
