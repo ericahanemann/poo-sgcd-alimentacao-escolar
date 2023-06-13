@@ -5,18 +5,22 @@ import ControleAlimentacao.CardapioMensal;
 import ControleAlimentacao.CardapioSemanal;
 
 import javax.swing.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
         //controle
-        int tipoUsuario = 99, admOpcao = 99, cmsOpcao = 99;
+        int tipoUsuario = 99, admOpcao = 99, cmsOpcao = 99, numeroCheckins = 0, numeroCadastros = 0;
 
-        //estanciando objetos
+        ArrayList<LocalDate> listaDataCheckin = new ArrayList<LocalDate>();
+        ArrayList<LocalDate> listaDataCadastro = new ArrayList<LocalDate>();
         ArrayList<Administrador> listaAdms = new ArrayList<Administrador>();
         ArrayList<Comensal> listaComensais = new ArrayList<Comensal>();
         ArrayList<Alimento> listaAlimentos = new ArrayList<Alimento>();
 
+        //estanciando objetos
         Administrador novoAdm = new Administrador(
                 "Cirilo",
                 "123456789",
@@ -273,8 +277,56 @@ public class Main {
                                 }
 
                                 case 4: {
-                                    JOptionPane.showMessageDialog(null, "Gerando relatório...\n " +
-                                            "(se eu fosse você não esperaria muito tempo)"
+                                    int checkinsCincoDias = 0, checkinTrintaDias = 0, checkinTresMeses = 0;
+                                    int cadastrosCincoDias = 0, cadastrosTrintaDias = 0, cadastrosTresMeses = 0;
+                                    LocalDate dataCincoDiasAtras = LocalDate.now().minusDays(5);
+                                    LocalDate dataTrintaDiasAtras = LocalDate.now().minusDays(30);
+                                    LocalDate dataTresMesesAtras = LocalDate.now().minusMonths(3);
+
+                                    for (LocalDate data : listaDataCheckin) {
+                                        if (data.isAfter(dataCincoDiasAtras) || data.isEqual(dataCincoDiasAtras)) {
+                                            checkinsCincoDias++;
+                                        }
+                                        if (data.isAfter(dataTrintaDiasAtras) || data.isEqual(dataTrintaDiasAtras)) {
+                                            checkinTrintaDias++;
+                                        }
+                                        if (data.isAfter(dataTresMesesAtras) || data.isEqual(dataTresMesesAtras)) {
+                                            checkinTresMeses++;
+                                        }
+                                    }
+
+                                    for (LocalDate data : listaDataCadastro) {
+                                        if (data.isAfter(dataCincoDiasAtras) || data.isEqual(dataCincoDiasAtras)) {
+                                            cadastrosCincoDias++;
+                                        }
+                                        if (data.isAfter(dataTrintaDiasAtras) || data.isEqual(dataTrintaDiasAtras)) {
+                                            cadastrosTrintaDias++;
+                                        }
+                                        if (data.isAfter(dataTresMesesAtras) || data.isEqual(dataTresMesesAtras)) {
+                                            cadastrosTresMeses++;
+                                        }
+                                    }
+
+                                    JOptionPane.showMessageDialog(null,
+                                            "RELATÓRIO DE CHECK-INS E CADASTROS NO SISTEMA" +
+                                                    "\n" +
+                                                    "-----------------------------------------------------------------------------" +
+                                                    "\n\n" +
+                                                    "Número total de check-ins realizados: " + numeroCheckins +
+                                                    "\nNúmero de check-ins realizados até 5 dias " +
+                                                    "atrás: " + checkinsCincoDias +
+                                                    "\nNúmero de check-ins realizados até 30 dias" +
+                                                    "atrás: " + checkinTrintaDias +
+                                                    "\nNúmero de check-ins realizados até 3 meses" +
+                                                    "atrás: " + checkinTrintaDias +
+                                                    "\n\n" +
+                                                    "Número total de cadastros realizados: " + numeroCadastros +
+                                                    "\nNúmero de cadastros realizados até 5 dias " +
+                                                    "atrás: " + cadastrosCincoDias +
+                                                    "\nNúmero de cadastros realizados até 30 dias" +
+                                                    " atrás: " + cadastrosTrintaDias +
+                                                    "\nNúmero de check-ins realizados até 3 meses" +
+                                                    " atrás: " + cadastrosTresMeses
                                     );
 
                                     break;
@@ -334,6 +386,10 @@ public class Main {
 
                                             if (opcaoCheckin == 1 && comensal.getSaldoCartao() >= 10) {
                                                 comensal.usoCartao(10);
+
+                                                numeroCheckins++;
+                                                listaDataCheckin.add(LocalDate.now());
+
                                                 JOptionPane.showMessageDialog(null,"Check-in realizado!\n" +
                                                         "Saldo atual do cartão: " + comensal.getSaldoCartao() + " créditos");
 
@@ -424,7 +480,9 @@ public class Main {
                             0);
                     listaComensais.add(novoCadastroComensal);
 
-                    JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso!");
+                    numeroCadastros++;
+                    listaDataCadastro.add(LocalDate.now());
+                    JOptionPane.showMessageDialog(null, "Aluno(a) cadastrado(a) com sucesso!");
 
                     break;
                 }
